@@ -5,9 +5,20 @@ from pydantic import BaseModel
 import uvicorn
 from typing import Optional
 from datetime import datetime
+from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI(title="🎯 Mini CRM API - Full CRUD Operations")
 
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=[
+        "https://crm-frontend.streamlit.app",  # Your Streamlit app domain
+        "http://localhost:8501"               # Local development
+    ],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 # Enhanced Pydantic models
 class CustomerCreate(BaseModel):
     name: str
