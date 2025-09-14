@@ -7,18 +7,21 @@ from typing import Optional
 from datetime import datetime
 from fastapi.middleware.cors import CORSMiddleware
 
-app = FastAPI(title="🎯 Mini CRM API - Full CRUD Operations")
+app = FastAPI(title="🎯 Mini CRM API - Render Deployment")
 
+# CORS middleware for Render deployment
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
-        "https://crm-frontend.streamlit.app",  # Your Streamlit app domain
-        "http://localhost:8501"               # Local development
+        "https://mini-crm-frontend.onrender.com",  # Your frontend Render URL
+        "http://localhost:8501",                   # Local development
+        "https://*.onrender.com"                   # All Render domains
     ],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
 # Enhanced Pydantic models
 class CustomerCreate(BaseModel):
     name: str
